@@ -45,6 +45,7 @@ void Game::Go() {
 
 void Game::UpdateModel() {
   if (_isStarted) {
+    _goal.update();
     _dude.update(_wnd.kbd);
     _dude.clampToScreen();
 

@@ -6,7 +6,16 @@
 class Goal {
  public:
   Goal(int x, int y) : _x(x), _y(y){};
-  void update() noexcept;
+  void update() noexcept {
+    _c.SetR(_c.GetR() + _colorStep);
+    _c.SetG(_c.GetG() + _colorStep * 2);
+    _c.SetB(_c.GetB() + _colorStep * 2);
+
+    // Update the color of the goal
+    if (_c.GetR() >= _maxRed || _c.GetR() <= _minRed) {
+      _colorStep *= -1;
+    }
+  }
 
   void respawn(int x, int y) { 
     _x = x;
@@ -28,6 +37,10 @@ class Goal {
  private:
   int _x;
   int _y;
-  Color _c = {255, 0, 0}; 
   static constexpr int _size = 20;
+
+  int _colorStep = 1;
+  static constexpr int _minRed = 130;
+  static constexpr int _maxRed = 255;
+  Color _c = {_minRed, 0, 0}; 
 };
