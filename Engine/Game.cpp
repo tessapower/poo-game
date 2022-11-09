@@ -29,7 +29,8 @@ Game::Game(MainWindow& wnd)
       _rng(_rd()),
       _xDist(0, 770),
       _yDist(0, 570),
-      _goal(_xDist(_rng), _yDist(_rng)) {
+      _goal(_xDist(_rng), _yDist(_rng)),
+      _meter() {
   std::uniform_int_distribution<int> vDist(-1,  1);
   for (int i = 0; i < _nPoo; ++i) {
     _poos[i].init(_xDist(_rng), _yDist(_rng), vDist(_rng), vDist(_rng));
@@ -44,20 +45,21 @@ void Game::Go() {
 }
 
 void Game::UpdateModel() {
-  if (_isStarted) {
+  if (_isStarted && !_isGameOver) {
     _goal.update();
     _dude.update(_wnd.kbd);
     _dude.clampToScreen();
 
     if (_goal.isColliding(_dude)) {
+      _meter.grow();
       _goal.respawn(_xDist(_rng), _yDist(_rng));
     }
 
     for (int i = 0; i < _nPoo; ++i) {
       auto& poo = _poos[i];
-      if (!poo.isEaten()) {
-        poo.update();
-        poo.processConsumption(_dude);
+      poo.update();
+      if (poo.isColliding(_dude)) {
+        _isGameOver = true;
       }
     }
 
@@ -28417,6 +28419,7 @@ void Game::ComposeFrame() {
     drawTitleScreen(325, 211);
   } else {
     _goal.draw(_gfx);
+    _meter.draw(_gfx);
 
     bool allEaten = true;
     for (int i = 0; i < _nPoo; ++i) {
@@ -28424,9 +28427,10 @@ void Game::ComposeFrame() {
       if (!allEaten) break;
     }
 
-    if (allEaten) {
+    if (_isGameOver) {
       drawGameOver(358, 268);
     }
+
     _dude.draw(_gfx);
 
     for (int i = 0; i < _nPoo; ++i) {

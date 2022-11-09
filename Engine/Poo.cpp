@@ -35,18 +35,16 @@ void Poo::update() {
   }
 }
 
-void Poo::processConsumption(const Dude& dude) {
+bool Poo::isColliding(const Dude& dude) {
   assert(_initialized);
+
   const int dudeRight = dude.x() + dude.width();
   const int dudebottom = dude.y() + dude.height();
   const int pooRight = _x + _width;
   const int pooBottom = _y + _height;
 
-  bool colliding = dudeRight > _x && dude.x() < pooRight &&
-                   dudebottom > _y && dude.y() < pooBottom;
-  if (colliding) {
-    _isEaten = true;
-  }
+  return dudeRight > _x && dude.x() < pooRight && dudebottom > _y &&
+         dude.y() < pooBottom;
 }
 
 void Poo::draw(Graphics& gfx) const {

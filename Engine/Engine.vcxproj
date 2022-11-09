@@ -146,6 +146,7 @@
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="MainWindow.h" />
+    <ClInclude Include="Meter.h" />
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="Poo.h" />
     <ClInclude Include="Resource.h" />
@@ -154,7 +155,6 @@
     <ClCompile Include="Dude.cpp" />
     <ClCompile Include="DXErr.cpp" />
     <ClCompile Include="Game.cpp" />
-    <ClCompile Include="Goal.cpp" />
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="Main.cpp" />

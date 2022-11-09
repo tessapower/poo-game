@@ -25,6 +25,7 @@
 #include "Goal.h"
 #include "Graphics.h"
 #include "Keyboard.h"
+#include "Meter.h"
 #include "Mouse.h"
 #include "Poo.h"
 #include <random>
@@ -59,9 +60,11 @@ private:
   
   Dude _dude;
   Goal _goal;
+  Meter _meter;
   static constexpr int _nPoo = 30;
   Poo _poos[_nPoo];
   
   bool _isStarted = false;
+  bool _isGameOver = false;
   /********************************/
 };
