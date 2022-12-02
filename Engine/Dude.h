@@ -3,6 +3,9 @@
 #include "Graphics.h"
 #include "Keyboard.h"
 
+/**
+ * @brief The main character of the Poo Game controlled by the player.
+*/
 class Dude {
  public:
   Dude() = default;
@@ -12,7 +15,16 @@ class Dude {
    * @brief Clamp this Dude's position to within the bounds of the window
    */
   void clampToWindow();
+
+  /**
+   * @brief Draw this Dude with the given Graphics context.
+   * @param gfx
+   */
   void draw(Graphics& gfx) const;
+
+  /**
+   * @brief Update this Dude's position based on player keyboard input.
+   */
   void update(const Keyboard& kbd);
 
   int x() const { return _x; }

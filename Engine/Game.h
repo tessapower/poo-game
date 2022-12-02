@@ -44,7 +44,15 @@ class Game {
 
   /********************************/
   /*  User Functions              */
+
+  /**
+   * @brief Draws the game over graphic at the given (x, y) coordinate.
+  */
   void drawGameOver(int x, int y);
+
+  /**
+   * @brief Draws the title graphic at the given (x, y) coordinate.
+  */
   void drawTitleScreen(int x, int y);
   /********************************/
 
@@ -54,15 +62,20 @@ class Game {
 
   /********************************/
   /*  User Variables              */
+
+  // Random number generation for generating initial random Poo locations and 
+  // new locations for the goal
   std::random_device _rd;
   std::mt19937 _rng;
   std::uniform_int_distribution<int> _xDist;
   std::uniform_int_distribution<int> _yDist;
 
+  // The hero and the bad guys
   Dude _dude;
   static constexpr int kNumPoos = 30;
   std::array<Poo, kNumPoos> _poos;
 
+  // Game state tracking
   Goal _goal;
   Meter _meter;
   bool _isStarted = false;

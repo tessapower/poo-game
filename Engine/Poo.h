@@ -8,7 +8,14 @@ class Poo {
   Poo() = default;
   ~Poo() = default;
 
+  /**
+   * @brief Initialize this Poo with a 2D location and velocity.
+  */
   void init(int x, int y, int vx, int vy);
+
+  /**
+   * @brief Update the location of this Poo based on its velocity.
+  */
   void update();
   bool isColliding(const Dude& dude) const;
   void draw(Graphics& gfx) const;

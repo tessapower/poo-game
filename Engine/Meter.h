@@ -2,8 +2,14 @@
 
 #include "Graphics.h"
 
+/**
+ * @brief Used to keep track of the number of Goals the player has reached.
+*/
 class Meter {
  public:
+  /**
+   * @brief Grow the meter by one bar.
+  */
   void grow() {
     if (kX + (_size * kWidth) < Graphics::ScreenWidth) ++_size;
   }

@@ -6,6 +6,7 @@
 
 void Poo::init(int x, int y, int vx, int vy) {
   assert(!_initialized);
+
   _x = x;
   _y = y;
   _vx = vx;
@@ -49,13 +50,10 @@ bool Poo::isColliding(const Dude& dude) const {
   const int pooRight = _x + kWidth;
   const int pooBottom = _y + kHeight;
 
-  return dudeRight > _x && dude.x() < pooRight && dudebottom > _y &&
-         dude.y() < pooBottom;
-}
-
-bool Poo::isEaten() const {
-  assert(_initialized);
-  return _isEaten;
+  return dudeRight > _x
+    && dude.x() < pooRight
+    && dudebottom > _y
+    && dude.y() < pooBottom;
 }
 
 void Poo::draw(Graphics& gfx) const {
