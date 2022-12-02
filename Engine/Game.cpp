@@ -46,7 +46,15 @@ void Game::Go() {
 }
 
 void Game::UpdateModel() {
-  if (_isStarted && !_isGameOver) {
+  if (!_isStarted) {
+    if (_wnd.kbd.KeyIsPressed(VK_RETURN)) {
+      _isStarted = true;
+    }
+
+    return;
+  }
+
+  if (!_isGameOver) {
     _goal.update();
     _dude.update(_wnd.kbd);
     _dude.clampToWindow();
@@ -61,31 +69,20 @@ void Game::UpdateModel() {
       if (p.isColliding(_dude)) _isGameOver = true;
     });
 
-  } else {
-    if (_wnd.kbd.KeyIsPressed(VK_RETURN)) {
-      _isStarted = true;
-    }
   }
 }
 
 void Game::ComposeFrame() {
   if (!_isStarted) {
     drawTitleScreen(325, 211);
-  } else {
-    _goal.draw(_gfx);
-    _meter.draw(_gfx);
 
-    bool allEaten = true;
-    for (int i = 0; i < _nPoo; ++i) {
-      allEaten &= _poos[i].isEaten();
-      if (!allEaten) break;
-    }
+    return;
+  }
 
-    if (_isGameOver) {
-      drawGameOver(358, 268);
-    }
+  _goal.draw(_gfx);
+  _meter.draw(_gfx);
 
-    _dude.draw(_gfx);
+  _dude.draw(_gfx);
 
   std::ranges::for_each(begin(_poos), end(_poos),
                         [&](Poo const& p) { p.draw(_gfx); });
