@@ -15,10 +15,14 @@ void Poo::init(int x, int y, int vx, int vy) {
 
 void Poo::update() {
   assert(_initialized);
+
   _x += _vx;
   _y += _vy;
+  clampToWindow();
+}
 
-  const int right = _x + _width;
+void Poo::clampToWindow() noexcept {
+  const int right = _x + kWidth;
   if (_x < 0) {
     _x = 0;
     _vx = -_vx;

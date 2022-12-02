@@ -9,7 +9,12 @@ class Poo {
   void update();
   bool isColliding(const Dude& dude);
   void draw(Graphics& gfx) const;
-  bool isEaten() const;
+
+ private:
+  /**
+   * @brief Clamp the location of this Poo to the window.
+  */
+  void clampToWindow() noexcept;
 
  private:
   int _x;
