@@ -33,9 +33,9 @@ Game::Game(MainWindow& wnd)
       _goal(_xDist(_rng), _yDist(_rng)),
       _meter() {
   std::uniform_int_distribution<int> vDist(-1, 1);
-  for (int i = 0; i < _nPoo; ++i) {
-    _poos[i].init(_xDist(_rng), _yDist(_rng), vDist(_rng), vDist(_rng));
-  }
+  std::ranges::for_each(begin(_poos), end(_poos), [&](Poo& p) {
+    p.init(_xDist(_rng), _yDist(_rng), vDist(_rng), vDist(_rng));
+  });
 }
 
 void Game::Go() {
@@ -56,13 +56,10 @@ void Game::UpdateModel() {
       _goal.respawn(_xDist(_rng), _yDist(_rng));
     }
 
-    for (int i = 0; i < _nPoo; ++i) {
-      auto& poo = _poos[i];
-      poo.update();
-      if (poo.isColliding(_dude)) {
-        _isGameOver = true;
-      }
-    }
+    std::ranges::for_each(begin(_poos), end(_poos), [&](Poo& p) {
+      p.update();
+      if (p.isColliding(_dude)) _isGameOver = true;
+    });
 
   } else {
     if (_wnd.kbd.KeyIsPressed(VK_RETURN)) {
@@ -90,13 +87,10 @@ void Game::ComposeFrame() {
 
     _dude.draw(_gfx);
 
-    for (int i = 0; i < _nPoo; ++i) {
-      auto& poo = _poos[i];
-      if (!poo.isEaten()) {
-        poo.draw(_gfx);
-      }
-    }
-  }
+  std::ranges::for_each(begin(_poos), end(_poos),
+                        [&](Poo const& p) { p.draw(_gfx); });
+
+  if (_isGameOver) drawGameOver(358, 268);
 }
 
 void Game::drawGameOver(int x, int y) {

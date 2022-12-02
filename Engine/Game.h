@@ -20,6 +20,7 @@
  ******************************************************************************************/
 #pragma once
 
+#include <array>
 #include <random>
 
 #include "Dude.h"
@@ -60,7 +61,7 @@ class Game {
 
   Dude _dude;
   static constexpr int kNumPoos = 30;
-  Poo _poos[kNumPoos];
+  std::array<Poo, kNumPoos> _poos;
 
   Goal _goal;
   Meter _meter;
