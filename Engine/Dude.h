@@ -4,6 +4,10 @@
 #include "Keyboard.h"
 
 class Dude {
+ public:
+  Dude() = default;
+  ~Dude() = default;
+
   /**
    * @brief Clamp this Dude's position to within the bounds of the window
    */
