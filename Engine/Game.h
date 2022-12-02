@@ -59,11 +59,11 @@ class Game {
   std::uniform_int_distribution<int> _yDist;
 
   Dude _dude;
+  static constexpr int kNumPoos = 30;
+  Poo _poos[kNumPoos];
+
   Goal _goal;
   Meter _meter;
-  static constexpr int _nPoo = 30;
-  Poo _poos[_nPoo];
-
   bool _isStarted = false;
   bool _isGameOver = false;
   /********************************/

@@ -3,18 +3,36 @@
 #include "Graphics.h"
 
 void Dude::clampToWindow() {
-  const int right = _x + _width;
+  const int right = _x + kWidth;
   if (_x < 0) {
     _x = 0;
   } else if (right >= Graphics::ScreenWidth) {
-    _x = (Graphics::ScreenWidth - 1) - _width;
+    _x = (Graphics::ScreenWidth - 1) - kWidth;
   }
 
-  const int bottom = _y + _height;
+  const int bottom = _y + kHeight;
   if (_y < 0) {
     _y = 0;
   } else if (bottom >= Graphics::ScreenHeight) {
-    _y = (Graphics::ScreenHeight - 1) - _height;
+    _y = (Graphics::ScreenHeight - 1) - kHeight;
+  }
+}
+
+void Dude::update(const Keyboard& kbd) {
+  if (kbd.KeyIsPressed(VK_RIGHT)) {
+    _x += kSpeed;
+  }
+
+  if (kbd.KeyIsPressed(VK_LEFT)) {
+    _x -= kSpeed;
+  }
+
+  if (kbd.KeyIsPressed(VK_DOWN)) {
+    _y += kSpeed;
+  }
+
+  if (kbd.KeyIsPressed(VK_UP)) {
+    _y -= kSpeed;
   }
 }
 
@@ -335,24 +353,6 @@ void Dude::draw(Graphics& gfx) const {
   gfx.PutPixel(10 + _x, 19 + _y, 0, 0, 0);
   gfx.PutPixel(11 + _x, 19 + _y, 0, 0, 0);
   gfx.PutPixel(12 + _x, 19 + _y, 0, 0, 0);
-}
-
-void Dude::update(const Keyboard & kbd) {
-  if (kbd.KeyIsPressed(VK_RIGHT)) {
-    _x += _speed;
-  }
-
-  if (kbd.KeyIsPressed(VK_LEFT)) {
-    _x -= _speed;
-  }
-  
-  if (kbd.KeyIsPressed(VK_DOWN)) {
-    _y += _speed;
-  }
-
-  if (kbd.KeyIsPressed(VK_UP)) {
-    _y -= _speed;
-  }
 }
 
 int Dude::x() const {

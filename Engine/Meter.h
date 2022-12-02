@@ -5,18 +5,18 @@
 class Meter {
  public:
   void grow() {
-    if (_x + (_size * _width) < Graphics::ScreenWidth) ++_size;
+    if (kX + (_size * kWidth) < Graphics::ScreenWidth) ++_size;
   }
 
   void draw(Graphics& gfx) {
-    gfx.DrawRect(_x, _y, _size * _width, _height, _c);
+    gfx.DrawRect(kX, kY, _size * kWidth, kHeight, kColor);
   }
 
  private:
   int _size = 0;
-  static constexpr int _x = 10;
-  static constexpr int _y = 10;
-  static constexpr int _width = 10;
-  static constexpr int _height = 15;
-  static constexpr Color _c = {100, 149, 237};
+  static constexpr int kX = 10;
+  static constexpr int kY = 10;
+  static constexpr int kWidth = 10;
+  static constexpr int kHeight = 15;
+  static constexpr Color kColor = {100, 149, 237};
 };

@@ -23,16 +23,16 @@ void Poo::update() {
     _x = 0;
     _vx = -_vx;
   } else if (right >= Graphics::ScreenWidth) {
-    _x = (Graphics::ScreenWidth - 1) - _width;
+    _x = (Graphics::ScreenWidth - 1) - kWidth;
     _vx = -_vx;
   }
 
-  const int bottom = _y + _height;
+  const int bottom = _y + kHeight;
   if (_y < 0) {
     _y = 0;
     _vy = -_vy;
   } else if (bottom >= Graphics::ScreenHeight) {
-    _y = (Graphics::ScreenHeight - 1) - _height;
+    _y = (Graphics::ScreenHeight - 1) - kHeight;
     _vy = -_vy;
   }
 }
@@ -42,8 +42,8 @@ bool Poo::isColliding(const Dude& dude) {
 
   const int dudeRight = dude.x() + dude.width();
   const int dudebottom = dude.y() + dude.height();
-  const int pooRight = _x + _width;
-  const int pooBottom = _y + _height;
+  const int pooRight = _x + kWidth;
+  const int pooBottom = _y + kHeight;
 
   return dudeRight > _x && dude.x() < pooRight && dudebottom > _y &&
          dude.y() < pooBottom;

@@ -11,8 +11,8 @@ class Goal {
     _c.SetG(_c.GetG() + _colorStep * 2);
     _c.SetB(_c.GetB() + _colorStep * 2);
 
-    // Update the color of the goal
-    if (_c.GetR() >= _maxRed || _c.GetR() <= _minRed) {
+    // Cycle between min and max red color
+    if (_c.GetR() >= kMaxRed || _c.GetR() <= kMinRed) {
       _colorStep *= -1;
     }
   }
@@ -22,13 +22,13 @@ class Goal {
     _y = y;
   }
 
-  void draw(Graphics& gfx) { gfx.DrawRect(_x, _y, _size, _size, _c); }
+  void draw(Graphics& gfx) { gfx.DrawRect(_x, _y, kSize, kSize, _c); }
 
   bool isColliding(const Dude& dude) {
     const int dudeRight = dude.x() + dude.width();
     const int dudebottom = dude.y() + dude.height();
-    const int right = _x + _size;
-    const int bottom = _y + _size;
+    const int right = _x + kSize;
+    const int bottom = _y + kSize;
 
     return dudeRight > _x && dude.x() < right && dudebottom > _y &&
            dude.y() < bottom;
@@ -37,10 +37,10 @@ class Goal {
  private:
   int _x;
   int _y;
-  static constexpr int _size = 20;
+  static constexpr int kSize = 20;
 
   int _colorStep = 1;
-  static constexpr int _minRed = 130;
-  static constexpr int _maxRed = 255;
-  Color _c = {_minRed, 0, 0};
+  static constexpr int kMinRed = 130;
+  static constexpr int kMaxRed = 255;
+  Color _c = {kMinRed, 0, 0};
 };

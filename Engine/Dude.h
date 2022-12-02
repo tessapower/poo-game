@@ -18,7 +18,7 @@ class Dude {
 private:
   int _x = 400;
   int _y = 300;
-  static constexpr int _speed = 1;
-  static constexpr int _width = 20;
-  static constexpr int _height = 20;
+  static constexpr int kSpeed = 1;
+  static constexpr int kWidth = 20;
+  static constexpr int kHeight = 20;
 };

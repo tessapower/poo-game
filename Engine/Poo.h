@@ -17,8 +17,7 @@ class Poo {
   int _vx;
   int _vy;
 
-  static constexpr int _width = 24;
-  static constexpr int _height = 24;
-  bool _isEaten = false;
+  static constexpr int kWidth = 24;
+  static constexpr int kHeight = 24;
   bool _initialized = false;
 };
