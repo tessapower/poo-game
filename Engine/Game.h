@@ -72,7 +72,7 @@ class Game {
 
   // The hero and the bad guys
   Dude _dude;
-  static constexpr int kNumPoos = 30;
+  static constexpr int kNumPoos = 10;
   std::array<Poo, kNumPoos> _poos;
 
   // Game state tracking
