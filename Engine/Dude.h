@@ -10,12 +10,16 @@ class Dude {
   void clampToWindow();
   void draw(Graphics& gfx) const;
   void update(const Keyboard& kbd);
-  int x() const;
-  int y() const;
-  int width() const;
-  int height() const;
 
-private:
+  int x() const { return _x; }
+
+  int y() const { return _y; }
+
+  int width() const { return kWidth; }
+
+  int height() const { return kHeight; }
+
+ private:
   int _x = 400;
   int _y = 300;
   static constexpr int kSpeed = 1;

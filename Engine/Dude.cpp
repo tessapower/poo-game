@@ -354,19 +354,3 @@ void Dude::draw(Graphics& gfx) const {
   gfx.PutPixel(11 + _x, 19 + _y, 0, 0, 0);
   gfx.PutPixel(12 + _x, 19 + _y, 0, 0, 0);
 }
-
-int Dude::x() const {
-  return _x;
-}
-
-int Dude::y() const {
-  return _y;
-}
-
-int Dude::width() const {
-  return _width;
-}
-
-int Dude::height() const {
-  return _height;
-}
