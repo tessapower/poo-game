@@ -7,7 +7,7 @@ class Poo {
  public:
   void init(int x, int y, int vx, int vy);
   void update();
-  bool isColliding(const Dude& dude);
+  bool isColliding(const Dude& dude) const;
   void draw(Graphics& gfx) const;
 
  private:

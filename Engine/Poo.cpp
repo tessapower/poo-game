@@ -41,7 +41,7 @@ void Poo::clampToWindow() noexcept {
   }
 }
 
-bool Poo::isColliding(const Dude& dude) {
+bool Poo::isColliding(const Dude& dude) const {
   assert(_initialized);
 
   const int dudeRight = dude.x() + dude.width();
