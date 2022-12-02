@@ -5,6 +5,9 @@
 
 class Poo {
  public:
+  Poo() = default;
+  ~Poo() = default;
+
   void init(int x, int y, int vx, int vy);
   void update();
   bool isColliding(const Dude& dude) const;
