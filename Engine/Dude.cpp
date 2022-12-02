@@ -1,7 +1,8 @@
 #include "Dude.h"
+
 #include "Graphics.h"
 
-void Dude::clampToScreen() {
+void Dude::clampToWindow() {
   const int right = _x + _width;
   if (_x < 0) {
     _x = 0;

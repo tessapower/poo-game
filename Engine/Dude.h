@@ -4,8 +4,10 @@
 #include "Keyboard.h"
 
 class Dude {
-public:
-  void clampToScreen();
+  /**
+   * @brief Clamp this Dude's position to within the bounds of the window
+   */
+  void clampToWindow();
   void draw(Graphics& gfx) const;
   void update(const Keyboard& kbd);
   int x() const;
