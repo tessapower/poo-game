@@ -1,8 +1,10 @@
 #include "Poo.h"
-#include "Graphics.h"
+
 #include <assert.h>
 
-void Poo::init(int x,int y,int vx,int vy) {
+#include "Graphics.h"
+
+void Poo::init(int x, int y, int vx, int vy) {
   assert(!_initialized);
   _x = x;
   _y = y;
@@ -45,6 +47,11 @@ bool Poo::isColliding(const Dude& dude) {
 
   return dudeRight > _x && dude.x() < pooRight && dudebottom > _y &&
          dude.y() < pooBottom;
+}
+
+bool Poo::isEaten() const {
+  assert(_initialized);
+  return _isEaten;
 }
 
 void Poo::draw(Graphics& gfx) const {
@@ -281,9 +288,4 @@ void Poo::draw(Graphics& gfx) const {
   gfx.PutPixel(4 + _x, 23 + _y, 51, 28, 0);
   gfx.PutPixel(5 + _x, 23 + _y, 51, 28, 0);
   gfx.PutPixel(6 + _x, 23 + _y, 51, 28, 0);
-}
-
-bool Poo::isEaten() const {
-  assert(_initialized);
-  return _isEaten;
 }

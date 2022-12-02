@@ -17,14 +17,14 @@ class Goal {
     }
   }
 
-  void respawn(int x, int y) { 
+  void respawn(int x, int y) {
     _x = x;
     _y = y;
   }
 
   void draw(Graphics& gfx) { gfx.DrawRect(_x, _y, _size, _size, _c); }
 
-  bool isColliding(const Dude &dude) {
+  bool isColliding(const Dude& dude) {
     const int dudeRight = dude.x() + dude.width();
     const int dudebottom = dude.y() + dude.height();
     const int right = _x + _size;
@@ -42,5 +42,5 @@ class Goal {
   int _colorStep = 1;
   static constexpr int _minRed = 130;
   static constexpr int _maxRed = 255;
-  Color _c = {_minRed, 0, 0}; 
+  Color _c = {_minRed, 0, 0};
 };

@@ -1,27 +1,28 @@
 /******************************************************************************************
- * Chili DirectX Framework Version 16.07.20                                               *
- * Game.cpp                                                                               *
- * Copyright 2016 PlanetChili.net <http://www.planetchili.net>                            *
- *                                                                                        *
- * This file is part of The Chili DirectX Framework.                                      *
- *                                                                                        *
- * The Chili DirectX Framework is free software: you can redistribute it and/or modify    *
- * it under the terms of the GNU General Public License as published by                   *
- * the Free Software Foundation, either version 3 of the License, or                      *
- * (at your option) any later version.                                                    *
- *                                                                                        *
- * The Chili DirectX Framework is distributed in the hope that it will be useful,         *
- * but WITHOUT ANY WARRANTY; without even the implied warranty of                         *
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                          *
- * GNU General Public License for more details.                                           *
- *                                                                                        *
- * You should have received a copy of the GNU General Public License                      *
- * along with The Chili DirectX Framework.  If not, see <http://www.gnu.org/licenses/>.   *
- ******************************************************************************************/
+* Chili DirectX Framework Version 16.07.20                                                *
+* Game.cpp                                                                                *
+* Copyright 2016 PlanetChili.net <http://www.planetchili.net>                             *
+*                                                                                         *
+* This file is part of The Chili DirectX Framework.                                       *
+*                                                                                         *
+* The Chili DirectX Framework is free software: you can redistribute it and/or modify     *
+* it under the terms of the GNU General Public License as published by                    *
+* the Free Software Foundation, either version 3 of the License, or                       *
+* (at your option) any later version.                                                     *
+*                                                                                         *
+* The Chili DirectX Framework is distributed in the hope that it will be useful,          *
+* but WITHOUT ANY WARRANTY; without even the implied warranty of                          *
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                           *
+* GNU General Public License for more details.                                            *
+*                                                                                         *
+* You should have received a copy of the GNU General Public License                       *
+* along with The Chili DirectX Framework.  If not, see <http://www.gnu.org/licenses/>.    *
+******************************************************************************************/
+#include "Game.h"
+
+#include <random>
 
 #include "MainWindow.h"
-#include "Game.h"
-#include <random>
 
 Game::Game(MainWindow& wnd)
     : _wnd(wnd),
@@ -31,7 +32,7 @@ Game::Game(MainWindow& wnd)
       _yDist(0, 570),
       _goal(_xDist(_rng), _yDist(_rng)),
       _meter() {
-  std::uniform_int_distribution<int> vDist(-1,  1);
+  std::uniform_int_distribution<int> vDist(-1, 1);
   for (int i = 0; i < _nPoo; ++i) {
     _poos[i].init(_xDist(_rng), _yDist(_rng), vDist(_rng), vDist(_rng));
   }
@@ -48,7 +49,7 @@ void Game::UpdateModel() {
   if (_isStarted && !_isGameOver) {
     _goal.update();
     _dude.update(_wnd.kbd);
-    _dude.clampToScreen();
+    _dude.clampToWindow();
 
     if (_goal.isColliding(_dude)) {
       _meter.grow();
@@ -66,6 +67,34 @@ void Game::UpdateModel() {
   } else {
     if (_wnd.kbd.KeyIsPressed(VK_RETURN)) {
       _isStarted = true;
+    }
+  }
+}
+
+void Game::ComposeFrame() {
+  if (!_isStarted) {
+    drawTitleScreen(325, 211);
+  } else {
+    _goal.draw(_gfx);
+    _meter.draw(_gfx);
+
+    bool allEaten = true;
+    for (int i = 0; i < _nPoo; ++i) {
+      allEaten &= _poos[i].isEaten();
+      if (!allEaten) break;
+    }
+
+    if (_isGameOver) {
+      drawGameOver(358, 268);
+    }
+
+    _dude.draw(_gfx);
+
+    for (int i = 0; i < _nPoo; ++i) {
+      auto& poo = _poos[i];
+      if (!poo.isEaten()) {
+        poo.draw(_gfx);
+      }
     }
   }
 }
@@ -28412,32 +28441,4 @@ void Game::drawTitleScreen(int x, int y) {
   _gfx.PutPixel(147 + x, 174 + y, 208, 34, 34);
   _gfx.PutPixel(148 + x, 174 + y, 208, 34, 34);
   _gfx.PutPixel(149 + x, 174 + y, 208, 34, 34);
-}
-
-void Game::ComposeFrame() {
-  if (!_isStarted) {
-    drawTitleScreen(325, 211);
-  } else {
-    _goal.draw(_gfx);
-    _meter.draw(_gfx);
-
-    bool allEaten = true;
-    for (int i = 0; i < _nPoo; ++i) {
-      allEaten &= _poos[i].isEaten();
-      if (!allEaten) break;
-    }
-
-    if (_isGameOver) {
-      drawGameOver(358, 268);
-    }
-
-    _dude.draw(_gfx);
-
-    for (int i = 0; i < _nPoo; ++i) {
-      auto& poo = _poos[i];
-      if (!poo.isEaten()) {
-        poo.draw(_gfx);
-      }
-    }
-  }
 }

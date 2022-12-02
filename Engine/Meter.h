@@ -4,7 +4,7 @@
 
 class Meter {
  public:
-  void grow() { 
+  void grow() {
     if (_x + (_size * _width) < Graphics::ScreenWidth) ++_size;
   }
 

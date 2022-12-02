@@ -18,8 +18,9 @@
  * You should have received a copy of the GNU General Public License                      *
  * along with The Chili DirectX Framework.  If not, see <http://www.gnu.org/licenses/>.   *
  ******************************************************************************************/
-
 #pragma once
+
+#include <random>
 
 #include "Dude.h"
 #include "Goal.h"
@@ -28,26 +29,25 @@
 #include "Meter.h"
 #include "Mouse.h"
 #include "Poo.h"
-#include <random>
 
 class Game {
-public:
+ public:
   Game(class MainWindow& wnd);
   Game(const Game&) = delete;
   Game& operator=(const Game&) = delete;
   void Go();
 
-private:
+ private:
   void ComposeFrame();
   void UpdateModel();
 
   /********************************/
   /*  User Functions              */
-  void drawGameOver(int x,int y);
-  void drawTitleScreen(int x,int y);
+  void drawGameOver(int x, int y);
+  void drawTitleScreen(int x, int y);
   /********************************/
 
-private:
+ private:
   MainWindow& _wnd;
   Graphics _gfx;
 
@@ -57,13 +57,13 @@ private:
   std::mt19937 _rng;
   std::uniform_int_distribution<int> _xDist;
   std::uniform_int_distribution<int> _yDist;
-  
+
   Dude _dude;
   Goal _goal;
   Meter _meter;
   static constexpr int _nPoo = 30;
   Poo _poos[_nPoo];
-  
+
   bool _isStarted = false;
   bool _isGameOver = false;
   /********************************/
