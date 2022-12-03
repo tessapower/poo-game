@@ -2,32 +2,45 @@
 
 [![Build](https://github.com/tessapower/cp-poo-game/actions/workflows/msbuild.yml/badge.svg)](https://github.com/tessapower/cp-poo-game/actions/workflows/msbuild.yml)
 
-A silly little Poo Game - a simple first experiment with a DirectX 11 based framework.
+A silly little Poo Game - a simple first experiment with a DirectX 11 based framework. This is a first step toward creating my own game engine framework built directly on DX11 and the Win32 API.
+
+## Wait, what?
+
+The Poo Game comes from one of Planet Chili's YouTube C++ Tutorial series. If you peek under the hood, you'll find the game is built using modern C++20 features and the Chili Framework. The Chili Framework is built on DirectX 11 and uses the Win32 API for window management.
+
+While not the most tasteful game, it was a good first experiment before I go ahead and create a similar framework on my own.
+
+## Game Architecture
+
+The core game loop runs inside `Game::Go` which is called each tick inside our `WinMain` function. All of the game logic is located and managed inside the `Game` class, acting as both Model and Controller. Clients of the Chili Framework are largely expected to contain their game logic to this class for building simple games. For this game, each game object implements the [Update Method](http://gameprogrammingpatterns.com/update-method.html) design pattern, and takes care of drawing itself to the window with the framework's `Graphics` context. All graphics you see in the game were provided with the framework, including the code to draw them to the window.
 
 ## Requirements
 
 - Visual Studio 2022
-- C++14
+- C++20
+- Win7+
 - A graphics card that supports DX11
 
-## Screenshots
+## How to Build & Run
 
-### Title Screen
+You can build the solution using either Visual Studio or from the command line with MSBuild.
 
-![image](https://user-images.githubusercontent.com/25911223/204121491-5d772479-3923-40fc-a8ae-19b7b125335b.png)
+### Visual Studio
 
-### Gameplay
+Building the solution should work as expected. Wait for the solution to load and press the big ol' play button (or ctrl-F5 if you are lazy like me).
 
-Reach the goals, avoid the poo!
+### MSBuild from the Developer Command Prompt
 
-![image](https://user-images.githubusercontent.com/25911223/204121515-ccb3c818-4d9e-408e-a9d1-8ddb138a6d81.png)
+You can build the solution with MSBuild from a Developer Command Prompt, or from Powershell if you have the standalone Build Tools for VS 2022 installed and don't want to launch Visual Studio.
 
-![image](https://user-images.githubusercontent.com/25911223/204121546-478fed6e-d60b-4fe1-b784-1b876bcab31d.png)
+Run MSBuild.exe in the root of the project (automatically builds the `.sln` file in the current dir) and then launch the game with `& '.\x64\Debug\The Poo Game.exe'`.
 
-### Game over
+## How to Play
 
-![image](https://user-images.githubusercontent.com/25911223/204121571-310ff2e7-d9c6-4622-9dc1-413621999d35.png)
+:smile: Use the arrow keys to move your little Dude around the screen.
 
-## Attributions
+:red_circle: Reach the goals to score points.
 
-The Poo Game idea came from Planet Chili's Beginner C++ tutorial series. The game was created using Chili's framework, which is based on DX11.
+:poop: Avoid the poop.
+
+<img src="poogame.gif" alt="The Poo Game" height="300" />
